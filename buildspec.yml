@@ -7,7 +7,7 @@ phases:
       - sed -i "s@\$GITHUB_URL@$GITHUB_URL@g" settings.xml
       - sed -i "s@\$GITHUB_USERNAME@$GITHUB_USERNAME@g" settings.xml
       - sed -i "s@\$GITHUB_TOKEN@$GITHUB_URL@g" settings.xml
-      - echo settings.xml
+      - cat settings.xml
   build:
     commands:
       - cd app/ && mvn -s ../settings.xml -DaltDeploymentRepositery=github::default::$GITHUB_URL -Pdev package
