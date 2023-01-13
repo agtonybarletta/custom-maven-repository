@@ -16,4 +16,4 @@ phases:
       java -jar app/target/app-*.jar
 artifacts:
   files:
-    - target/app-*.jar
+    - app/target/app-*.jar
