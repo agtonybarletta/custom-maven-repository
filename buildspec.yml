@@ -1,14 +1,18 @@
 version: 0.1
 
 phases:
-  build:
-    commands:
-      - echo Build started on `date`
-      - mvn test
-  post_build:
+  pre_build:
     commands:
       - echo Build completed on `date`
-      - cd app/ && mvn package
+      - sed -i "s@\$GITHUB_URL@"$GITHUB_URL"@g" settings.xml
+      - sed -i "s@\$GITHUB_USERNAME@"$GITHUB_USERNAME"@g" settings.xml
+      - sed -i "s@\$GITHUB_TOKEN@"$GITHUB_URL"@g" settings.xml
+  build:
+    commands:
+      - cd app/ && mvn -s ../settings.xml -DaltDeploymentRepositery=github::default::$GITHUB_URL -Pdev package
+  post_build:
+    commands:
+      java -jar app/target/app.jar
 artifacts:
   files:
     - target/app.jar
