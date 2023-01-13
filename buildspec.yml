@@ -13,7 +13,7 @@ phases:
       - cd app/ && mvn -s ../settings.xml -DaltDeploymentRepositery=github::default::$GITHUB_URL -Pdev package
   post_build:
     commands:
-      java -jar app/target/app.jar
+      java -jar app/target/app-*.jar
 artifacts:
   files:
     - target/app.jar
